@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Muhammad Abdullah — Azure DevOps & Cloud Infrastructure Engineer</title>
+<meta name="description" content="Senior Azure DevOps & Cloud Infrastructure Engineer. Microsoft Certified Azure Solutions Architect Expert (AZ-305). 5+ years building hybrid & multi-cloud environments plus enterprise GenAI on Azure OpenAI, Azure AI Foundry, and Azure MCP Server." />
+<meta name="author" content="Muhammad Abdullah" />
+<!-- Open Graph -->
+<meta property="og:title" content="Muhammad Abdullah — Azure DevOps & Cloud Infrastructure Engineer" />
+<meta property="og:description" content="Microsoft Certified Azure Solutions Architect Expert. CI/CD, Kubernetes/AKS, Terraform, SRE & observability." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Palette — control-plane / observability console */
+    --bg: #0a0e17;
+    --bg-panel: #0f1622;
+    --bg-panel-2: #131c2b;
+    --border: #1f2c40;
+    --border-bright: #2b3d57;
+    --ink: #e6ecf5;
+    --ink-dim: #8a99b4;
+    --ink-faint: #5a6b86;
+    --azure: #3aa0ff;        /* Azure signal blue */
+    --cyan: #2ee6c8;         /* healthy / live */
+    --amber: #ffb648;        /* warn accent */
+    --violet: #8b7dff;
+    --grad: linear-gradient(120deg, #3aa0ff 0%, #2ee6c8 100%);
+    --radius: 14px;
+    --maxw: 1180px;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --body: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ambient grid backdrop */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    opacity: 0.18;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, #000 30%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan); box-shadow: 0 0 0 0 rgba(46,230,200,.6);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46,230,200,.5); }
+    70% { box-shadow: 0 0 0 9px rgba(46,230,200,0); }
+    100% { box-shadow: 0 0 0 0 rgba(46,230,200,0); }
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px);
+    background: rgba(10,14,23,0.72);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--mono); font-weight: 700; letter-spacing: 0.04em; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--grad); box-shadow: 0 0 12px var(--azure); }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { font-size: 0.86rem; color: var(--ink-dim); transition: color .2s; font-weight: 500; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-family: var(--mono); font-size: 0.78rem; padding: 9px 16px;
+    border: 1px solid var(--border-bright); border-radius: 8px; color: var(--ink) !important;
+    transition: all .2s;
+  }
+  .nav-cta:hover { border-color: var(--azure); box-shadow: 0 0 18px rgba(58,160,255,.25); }
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: 0; padding: 6px; }
+  .burger span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: .25s; }
+
+  /* ---------- HERO ---------- */
+  header.hero { padding: 88px 0 64px; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+  h1.title {
+    font-family: var(--display); font-weight: 700; line-height: 1.05;
+    font-size: clamp(2.4rem, 5.2vw, 4.1rem); letter-spacing: -0.02em; margin: 18px 0 8px;
+  }
+  h1.title .accent { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .role {
+    font-family: var(--mono); color: var(--ink-dim); font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    margin-bottom: 22px; letter-spacing: 0.01em;
+  }
+  .hero-lead { color: var(--ink-dim); font-size: 1.04rem; max-width: 52ch; margin-bottom: 30px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono); font-size: 0.85rem; font-weight: 500;
+    padding: 13px 22px; border-radius: 10px; cursor: pointer; transition: all .22s;
+    display: inline-flex; align-items: center; gap: 9px; border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--grad); color: #061018; font-weight: 700; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(58,160,255,.32); }
+  .btn-ghost { border-color: var(--border-bright); color: var(--ink); }
+  .btn-ghost:hover { border-color: var(--cyan); box-shadow: 0 0 18px rgba(46,230,200,.2); }
+
+  .loc { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); margin-top: 26px; display: flex; gap: 18px; flex-wrap: wrap; }
+  .loc span { display: inline-flex; align-items: center; gap: 7px; }
+
+  /* hero status console card */
+  .console {
+    background: linear-gradient(180deg, var(--bg-panel) 0%, var(--bg-panel-2) 100%);
+    border: 1px solid var(--border-bright); border-radius: var(--radius);
+    overflow: hidden; box-shadow: 0 30px 60px -28px rgba(0,0,0,.7);
+  }
+  .console-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border); background: rgba(0,0,0,.2); }
+  .console-bar .lamp { width: 11px; height: 11px; border-radius: 50%; }
+  .lamp.r { background: #ff5f57; } .lamp.y { background: #febc2e; } .lamp.g { background: #28c840; }
+  .console-bar .label { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); margin-left: 8px; }
+  .console-body { padding: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .metric { background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .metric .k { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-faint); }
+  .metric .v { font-family: var(--display); font-size: 1.7rem; font-weight: 700; margin-top: 4px; }
+  .metric .v.up { color: var(--cyan); } .metric .v.az { color: var(--azure); }
+  .metric .d { font-size: 0.72rem; color: var(--ink-faint); margin-top: 2px; }
+  .spark { height: 3px; border-radius: 2px; margin-top: 10px; background: linear-gradient(90deg, var(--azure), var(--cyan)); opacity: .5; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section { padding: 72px 0; position: relative; }
+  .sec-head { margin-bottom: 40px; }
+  .sec-head h2 { font-family: var(--display); font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 700; letter-spacing: -0.01em; margin-top: 10px; }
+  .sec-head p { color: var(--ink-dim); max-width: 60ch; margin-top: 10px; }
+
+  /* ---------- METRICS STRIP ---------- */
+  .impact { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .impact .card {
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px 22px; position: relative; overflow: hidden; transition: border-color .25s, transform .25s;
+  }
+  .impact .card:hover { border-color: var(--border-bright); transform: translateY(-3px); }
+  .impact .card::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 3px; background: var(--grad); }
+  .impact .num { font-family: var(--display); font-weight: 700; font-size: 2.4rem; line-height: 1; }
+  .impact .num .pm { color: var(--cyan); }
+  .impact .lab { color: var(--ink-dim); font-size: 0.9rem; margin-top: 8px; }
+
+  /* ---------- ABOUT + SKILLS ---------- */
+  .two-col { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 48px; align-items: start; }
+  .about-body p { color: var(--ink-dim); margin-bottom: 16px; }
+  .about-body strong { color: var(--ink); font-weight: 600; }
+  .certs { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
+  .cert {
+    display: flex; align-items: center; gap: 14px; padding: 12px 16px;
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px;
+  }
+  .cert .badge { font-family: var(--mono); font-size: 0.68rem; padding: 5px 9px; border-radius: 6px; background: rgba(58,160,255,.12); color: var(--azure); border: 1px solid rgba(58,160,255,.3); white-space: nowrap; }
+  .cert .ct { font-size: 0.9rem; }
+  .cert .yr { margin-left: auto; font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); }
+
+  .skill-group { margin-bottom: 22px; }
+  .skill-group h4 { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 0.78rem; padding: 7px 12px; border-radius: 8px;
+    background: var(--bg-panel); border: 1px solid var(--border); color: var(--ink-dim);
+    transition: all .2s;
+  }
+  .chip:hover { border-color: var(--azure); color: var(--ink); }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(var(--azure), var(--cyan), transparent); }
+  .tl-item { position: relative; padding-bottom: 38px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -27px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--azure); box-shadow: 0 0 12px rgba(58,160,255,.5);
+  }
+  .tl-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+  .tl-role { font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
+  .tl-co { color: var(--cyan); font-weight: 600; }
+  .tl-date { font-family: var(--mono); font-size: 0.76rem; color: var(--ink-faint); margin-left: auto; }
+  .tl-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .tl-list li { color: var(--ink-dim); font-size: 0.93rem; padding-left: 20px; position: relative; }
+  .tl-list li::before { content: "▸"; position: absolute; left: 0; color: var(--azure); font-size: 0.8rem; top: 1px; }
+  .tl-list b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .proj {
+    background: linear-gradient(180deg, var(--bg-panel), var(--bg-panel-2));
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 26px;
+    display: flex; flex-direction: column; transition: all .25s; position: relative; overflow: hidden;
+  }
+  .proj:hover { border-color: var(--border-bright); transform: translateY(-4px); box-shadow: 0 20px 40px -24px rgba(0,0,0,.8); }
+  .proj .pico { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; background: rgba(58,160,255,.1); border: 1px solid rgba(58,160,255,.25); margin-bottom: 16px; }
+  .proj .pico svg { width: 22px; height: 22px; stroke: var(--azure); }
+  .proj h3 { font-family: var(--display); font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; }
+  .proj p { color: var(--ink-dim); font-size: 0.9rem; flex: 1; }
+  .proj .outcome { font-family: var(--mono); font-size: 0.8rem; color: var(--cyan); margin: 14px 0; font-weight: 500; }
+  .proj .stack { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .proj .stack span { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-faint); }
+  .proj .stack span::after { content: "·"; margin-left: 6px; color: var(--border-bright); }
+  .proj .stack span:last-child::after { content: ""; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-card {
+    background: linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-panel-2) 100%);
+    border: 1px solid var(--border-bright); border-radius: 20px; padding: 56px 48px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .contact-card::before {
+    content: ""; position: absolute; inset: -2px; background: radial-gradient(circle at 50% -20%, rgba(58,160,255,.18), transparent 60%);
+    pointer-events: none;
+  }
+  .contact-card h2 { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; position: relative; }
+  .contact-card p { color: var(--ink-dim); max-width: 50ch; margin: 14px auto 28px; position: relative; }
+  .contact-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+  /* ---------- FOOTER ---------- */
+  footer { border-top: 1px solid var(--border); padding: 30px 0; }
+  .foot-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  .foot-inner p { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); }
+  .foot-links { display: flex; gap: 20px; }
+  .foot-links a { font-size: 0.82rem; color: var(--ink-dim); transition: color .2s; }
+  .foot-links a:hover { color: var(--cyan); }
+
+  /* reveal animation */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .hero-grid, .two-col { grid-template-columns: 1fr; }
+    .console { margin-top: 8px; }
+    .impact { grid-template-columns: repeat(2, 1fr); }
+    .proj-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { position: fixed; inset: 64px 0 auto 0; flex-direction: column; background: rgba(10,14,23,.98); border-bottom: 1px solid var(--border); padding: 22px 24px; gap: 18px; transform: translateY(-130%); transition: transform .3s; }
+    .nav-links.open { transform: translateY(0); }
+    .burger { display: flex; }
+    .tl-date { margin-left: 0; width: 100%; }
+  }
+  @media (max-width: 560px) {
+    .impact, .proj-grid { grid-template-columns: 1fr; }
+    .console-body { grid-template-columns: 1fr; }
+    header.hero { padding: 56px 0 40px; }
+    .contact-card { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a role="button" tabindex="0" data-scroll="top" class="brand"><span class="dot"></span>M. ABDULLAH</a>
+    <div class="nav-links" id="navlinks">
+      <a role="button" tabindex="0" data-scroll="about">About</a>
+      <a role="button" tabindex="0" data-scroll="skills">Stack</a>
+      <a role="button" tabindex="0" data-scroll="experience">Experience</a>
+      <a role="button" tabindex="0" data-scroll="projects">Projects</a>
+      <a role="button" tabindex="0" data-scroll="contact" class="nav-cta">Get in touch</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<a id="top"></a>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Azure · Cloud Infrastructure · SRE · GenAI</span>
+      <h1 class="title">Muhammad Abdullah</h1>
+      <p class="role">Senior <span style="color:var(--azure)">Azure DevOps</span> &amp; Cloud Infrastructure Engineer</p>
+      <p class="hero-lead">I build, automate, and scale large-scale hybrid and multi-cloud environments — and increasingly, the GenAI platforms that run on them: turning fragile manual operations into reproducible, observable, cost-efficient infrastructure.</p>
+      <div class="cta-row">
+        <a role="button" tabindex="0" data-scroll="projects" class="btn btn-primary">View projects →</a>
+        <a role="button" tabindex="0" data-scroll="contact" class="btn btn-ghost">Contact me</a>
+      </div>
+      <div class="loc">
+        <span>📍 Lahore, Pakistan</span>
+        <span>⚡ 5+ years in production cloud</span>
+        <span>🎓 AZ-305 Solutions Architect Expert</span>
+      </div>
+    </div>
+
+    <div class="console" aria-hidden="true">
+      <div class="console-bar">
+        <span class="lamp r"></span><span class="lamp y"></span><span class="lamp g"></span>
+        <span class="label">~/azure · platform-health · live</span>
+      </div>
+      <div class="console-body">
+        <div class="metric">
+          <div class="k">Release Cadence</div>
+          <div class="v up">+30%</div>
+          <div class="d">faster cycles</div>
+          <div class="spark"></div>
+        </div>
+        <div class="metric">
+          <div class="k">MTTR</div>
+          <div class="v up">−25%</div>
+          <div class="d">incident response</div>
+          <div class="spark"></div>
+        </div>
+        <div class="metric">
+          <div class="k">Landing Zone</div>
+          <div class="v az">−40%</div>
+          <div class="d">delivery time</div>
+          <div class="spark"></div>
+        </div>
+        <div class="metric">
+          <div class="k">Cloud Spend</div>
+          <div class="v az">−20%</div>
+          <div class="d">monthly billing</div>
+          <div class="spark"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- IMPACT METRICS -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="impact reveal">
+      <div class="card"><div class="num">40<span class="pm">%</span></div><div class="lab">Faster landing-zone delivery</div></div>
+      <div class="card"><div class="num">30<span class="pm">%</span></div><div class="lab">Faster release cycles via CI/CD</div></div>
+      <div class="card"><div class="num">25<span class="pm">%</span></div><div class="lab">Faster incident response (MTTR)</div></div>
+      <div class="card"><div class="num">20<span class="pm">%</span></div><div class="lab">Lower recurring cloud spend</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT + CERTS -->
+<section id="about">
+  <div class="wrap two-col">
+    <div class="reveal">
+      <div class="sec-head" style="margin-bottom:24px">
+        <span class="eyebrow">// about</span>
+        <h2>Engineering reliability into the cloud</h2>
+      </div>
+      <div class="about-body">
+        <p>I'm an <strong>Azure DevOps and Cloud Infrastructure Engineer</strong> with 5+ years building and operating production cloud platforms — and growing depth in <strong>enterprise GenAI on Azure</strong>. I treat automation, monitoring, and reliability as engineering problems — not operational afterthoughts.</p>
+        <p>My depth spans <strong>CI/CD</strong> with Azure Pipelines (YAML), Jenkins, and GitHub Actions; container orchestration with <strong>Docker, Kubernetes/AKS, and Helm</strong>; and <strong>Infrastructure as Code</strong> with Terraform, Bicep, and ARM. Most recently I've built RAG pipelines and AI agents on <strong>Azure OpenAI and Azure AI Foundry</strong>, and deployed a custom <strong>Azure MCP Server</strong> to securely connect those agents to tenant tools and data.</p>
+        <p>I deliver iteratively inside Agile/Scrum teams and partner closely with security and platform stakeholders to enforce governance, compliance, and cost discipline.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="sec-head" style="margin-bottom:24px">
+        <span class="eyebrow">// certifications</span>
+        <h2 style="font-size:1.5rem">Verified credentials</h2>
+      </div>
+      <div class="certs">
+        <div class="cert"><span class="badge">AZ-305</span><span class="ct">Azure Solutions Architect Expert</span><span class="yr">2025</span></div>
+        <div class="cert"><span class="badge">AZ-104</span><span class="ct">Azure Administrator Associate</span><span class="yr">2024</span></div>
+        <div class="cert"><span class="badge">TF-003</span><span class="ct">HashiCorp Terraform Associate</span><span class="yr">2024</span></div>
+        <div class="cert"><span class="badge">AZ-900</span><span class="ct">Azure Fundamentals</span><span class="yr">2023</span></div>
+        <div class="cert"><span class="badge">GH</span><span class="ct">GitHub Foundations</span><span class="yr">2023</span></div>
+      </div>
+      <div class="cert" style="margin-top:18px;background:rgba(46,230,200,.05);border-color:rgba(46,230,200,.2)">
+        <span class="badge" style="background:rgba(46,230,200,.12);color:var(--cyan);border-color:rgba(46,230,200,.3)">B.Sc</span>
+        <span class="ct">Computer Science — UET Lahore</span><span class="yr">2018–22</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">// the stack</span>
+      <h2>Tools I run in production</h2>
+      <p>A modern cloud-native toolchain across compute, delivery, infrastructure, reliability, and security.</p>
+    </div>
+    <div class="two-col reveal" style="gap:40px">
+      <div>
+        <div class="skill-group">
+          <h4>AI &amp; GenAI on Azure</h4>
+          <div class="chips">
+            <span class="chip">Azure OpenAI</span><span class="chip">Azure AI Foundry</span><span class="chip">Foundry Agent Service</span>
+            <span class="chip">AI Agents</span><span class="chip">RAG</span><span class="chip">Azure AI Search</span><span class="chip">Document Intelligence</span>
+            <span class="chip">Speech &amp; Vision</span><span class="chip">Content Safety</span><span class="chip">Azure MCP Server</span><span class="chip">Responsible AI</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Cloud Platforms</h4>
+          <div class="chips">
+            <span class="chip">Microsoft Azure</span><span class="chip">IaaS / PaaS / Serverless</span><span class="chip">AWS</span>
+            <span class="chip">App Services</span><span class="chip">Function Apps</span><span class="chip">Microsoft Fabric</span><span class="chip">Cost Management</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>CI/CD &amp; DevOps</h4>
+          <div class="chips">
+            <span class="chip">Azure Pipelines (YAML)</span><span class="chip">GitHub Actions</span><span class="chip">Jenkins</span>
+            <span class="chip">Git / GitOps</span><span class="chip">Blue-Green</span><span class="chip">Canary</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Containers &amp; Orchestration</h4>
+          <div class="chips">
+            <span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">AKS</span><span class="chip">Helm</span>
+            <span class="chip">ACR</span><span class="chip">AGIC</span><span class="chip">NGINX Ingress</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Infrastructure as Code</h4>
+          <div class="chips">
+            <span class="chip">Terraform</span><span class="chip">Bicep</span><span class="chip">ARM Templates</span>
+            <span class="chip">State Management</span><span class="chip">Drift Remediation</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group">
+          <h4>Reliability &amp; Observability</h4>
+          <div class="chips">
+            <span class="chip">SRE Practices</span><span class="chip">SLI / SLO</span><span class="chip">Azure Monitor</span>
+            <span class="chip">Log Analytics</span><span class="chip">App Insights</span><span class="chip">KQL</span><span class="chip">Alerting</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Security &amp; IAM</h4>
+          <div class="chips">
+            <span class="chip">Entra ID</span><span class="chip">RBAC</span><span class="chip">Managed Identities</span>
+            <span class="chip">Key Vault</span><span class="chip">Azure Policy</span><span class="chip">Defender for Cloud</span>
+            <span class="chip">Sentinel</span><span class="chip">WAF</span><span class="chip">MFA / SSO</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Networking</h4>
+          <div class="chips">
+            <span class="chip">VPN Gateway</span><span class="chip">ExpressRoute</span><span class="chip">Hub-Spoke VNets</span>
+            <span class="chip">Front Door</span><span class="chip">Azure Firewall</span><span class="chip">NSGs</span><span class="chip">DNS / TLS</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Scripting &amp; Data</h4>
+          <div class="chips">
+            <span class="chip">PowerShell Core</span><span class="chip">Bash</span><span class="chip">Python</span><span class="chip">Groovy</span>
+            <span class="chip">Azure SQL MI</span><span class="chip">Data Factory</span><span class="chip">Data Lake</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">// experience</span>
+      <h2>Where I've operated</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-top">
+          <span class="tl-role">Azure Cloud &amp; DevOps Engineer</span>
+          <span class="tl-co">· Contour Software</span>
+          <span class="tl-date">02/2025 — Present · Lahore</span>
+        </div>
+        <ul class="tl-list">
+          <li>Engineered a resilient hybrid network topology with <b>Azure VPN Gateway and ExpressRoute</b>, cutting inter-site latency for production workloads.</li>
+          <li>Led microservices modernization — containerized monoliths with <b>Docker</b>, stored images in <b>ACR</b>, and deployed to <b>AKS</b> via Helm.</li>
+          <li>Applied <b>SRE practices</b> with Azure Monitor and Log Analytics to strengthen reliability and lower MTTR by <b>25%</b>.</li>
+          <li>Implemented <b>AGIC, Azure Front Door, and NGINX Ingress</b> for global routing, SSL/TLS termination, and centralized WAF enforcement.</li>
+          <li>Provisioned high-availability <b>Azure SQL Managed Instances</b> with cross-region failover and point-in-time recovery.</li>
+          <li>Re-architected topology with <b>Azure Cost Management</b> and automated rightsizing, cutting operational cost by <b>15%</b>.</li>
+          <li>Built an enterprise GenAI platform on <b>Azure OpenAI and Azure AI Foundry</b> — production RAG pipelines and AI agents via <b>Foundry Agent Service, Azure AI Search, and Document Intelligence</b>.</li>
+          <li>Deployed, configured, and extended a custom <b>Azure MCP Server</b> for the tenant, securely exposing internal tools to agents with <b>Managed Identity, Entra ID, and Key Vault</b>.</li>
+          <li>Integrated <b>Azure AI Speech, Vision, and Content Safety</b> with responsible-AI guardrails and token/cost monitoring to keep GenAI spend predictable.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-top">
+          <span class="tl-role">Azure Associate Consultant (DevOps / Cloud)</span>
+          <span class="tl-co">· Systems Limited</span>
+          <span class="tl-date">07/2022 — 01/2025 · Lahore</span>
+        </div>
+        <ul class="tl-list">
+          <li>Authored modular <b>Terraform</b> and <b>ARM</b> templates automating Hub-and-Spoke Dev, QA, and Production landing zones.</li>
+          <li>Built CI/CD pipelines with <b>Azure Pipelines (YAML), Jenkins, and Git</b> — <b>30%</b> faster releases with fewer deployment errors.</li>
+          <li>Governed org-wide IAM via <b>Entra ID and Managed Identities</b>; secured secrets in <b>Key Vault</b> with Conditional Access, MFA, and SSO.</li>
+          <li>Enforced governance using <b>Azure Blueprints, Policy, and RBAC</b>, strengthening compliance posture.</li>
+          <li>Automated administration with <b>PowerShell and Bash</b>, saving ~8 engineering hours weekly; drove a <b>20%</b> recurring billing reduction.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-top">
+          <span class="tl-role">Trainee Consultant (Cloud Operations)</span>
+          <span class="tl-co">· Systems Limited</span>
+          <span class="tl-date">03/2022 — 06/2022 · Lahore</span>
+        </div>
+        <ul class="tl-list">
+          <li>Deployed and right-sized <b>VMs, Function Apps, and Web Apps</b> supporting 10+ production workloads.</li>
+          <li>Integrated <b>Azure Monitor, App Insights, and Log Analytics</b>, improving critical-severity response by <b>25%</b>.</li>
+          <li>Configured <b>VNets, NSGs, and Route Tables</b> for isolation and traffic segmentation; established Data Lake / Data Factory / Blob lifecycle tiering.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">// key projects</span>
+      <h2>Production-grade work</h2>
+      <p>Selected initiatives where infrastructure decisions translated into measurable outcomes.</p>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj">
+        <div class="pico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
+        <h3>Hybrid Cloud Landing Zone &amp; Migration</h3>
+        <p>Designed an end-to-end Azure landing zone and migrated on-premises workloads into a Hub-Spoke topology connected over VPN Gateway and ExpressRoute.</p>
+        <div class="outcome">↳ 40% reduction in migration time</div>
+        <div class="stack"><span>Terraform</span><span>Bicep</span><span>VPN Gateway</span><span>ExpressRoute</span><span>Hub-Spoke VNets</span></div>
+      </div>
+      <div class="proj">
+        <div class="pico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 2v6m0 8v6M2 12h6m8 0h6"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>CI/CD Automation for Microservices</h3>
+        <p>Developed Git-based YAML pipelines for containerized microservice deployments, pushing images to ACR and rolling out to AKS with Helm.</p>
+        <div class="outcome">↳ 30% faster release cycles</div>
+        <div class="stack"><span>Azure Pipelines</span><span>Docker</span><span>ACR</span><span>AKS</span><span>Helm</span></div>
+      </div>
+      <div class="proj">
+        <div class="pico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg></div>
+        <h3>Reliability &amp; Observability Uplift</h3>
+        <p>Instrumented SRE practices and centralized monitoring with KQL-driven dashboards and alerting across production services.</p>
+        <div class="outcome">↳ 25% MTTR reduction</div>
+        <div class="stack"><span>Azure Monitor</span><span>Log Analytics</span><span>App Insights</span><span>KQL</span></div>
+      </div>
+      <div class="proj">
+        <div class="pico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10l2 2M5 19l2-2m10-10l2-2"/></svg></div>
+        <h3>Enterprise GenAI Platform &amp; AI Agents</h3>
+        <p>Built a tenant-wide GenAI platform with RAG pipelines and AI agents grounded on enterprise data, exposing internal tools through a custom Azure MCP Server secured by Managed Identity and Key Vault.</p>
+        <div class="outcome">↳ Self-serve AI across the tenant</div>
+        <div class="stack"><span>Azure OpenAI</span><span>AI Foundry</span><span>Agent Service</span><span>AI Search</span><span>MCP Server</span><span>Content Safety</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <span class="eyebrow" style="justify-content:center">// open to opportunities</span>
+      <h2 style="margin-top:14px">Let's build something reliable</h2>
+      <p>Available for senior Azure DevOps, Cloud Infrastructure, and SRE roles. Reach out and I'll respond promptly.</p>
+      <div class="contact-row">
+        <a href="mailto:abdullahameen302@gmail.com" class="btn btn-primary">✉ abdullahameen302@gmail.com</a>
+        <a href="https://linkedin.com/in/muhammad-abdullah-azure-solution-architect-481233227/" target="_blank" rel="noopener" class="btn btn-ghost">in · LinkedIn</a>
+        <a href="tel:+923411344043" class="btn btn-ghost">☎ +92 341 1344043</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p>© <span id="yr"></span> Muhammad Abdullah · Built with intent in Lahore</p>
+    <div class="foot-links">
+      <a role="button" tabindex="0" data-scroll="about">About</a>
+      <a role="button" tabindex="0" data-scroll="projects">Projects</a>
+      <a role="button" tabindex="0" data-scroll="contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // mobile menu
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navlinks');
+  burger.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // smooth scroll for in-page links (uses data-scroll so it works even inside
+  // sandboxed previews where # anchors are treated as external navigation)
+  function scrollTo(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('[data-scroll]').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => { e.preventDefault(); scrollTo(el.getAttribute('data-scroll')); });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollTo(el.getAttribute('data-scroll')); }
+    });
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
